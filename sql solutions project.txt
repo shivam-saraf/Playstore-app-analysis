@@ -1,0 +1,65 @@
+select app from playstore_apps_cleaned 
+where rating=(select max(rating) from playstore_apps_cleaned);
+
+
+
+
+select app,installs as install_count ,reviews as review_count from playstore_apps_cleaned 
+where rating=(select max(rating) from playstore_apps_cleaned)
+order by review_count desc
+
+
+
+
+
+select app,category,  reviews from playstore_apps_cleaned     
+where reviews=(select max(Reviews) from playstore_apps_cleaned)
+
+
+
+
+
+select sum(price*Installs) from playstore_apps_cleaned
+
+
+
+select category,sum(installs) as total_installs from playstore_apps_cleaned
+group by category
+order by total_installs desc
+limit 1
+
+
+
+
+
+with abc as (select genres,count(app) as app_count from playstore_apps_cleaned group  by genres)
+select genres from abc where app_count=(select max(app_count) from abc)
+
+
+
+
+
+select distinct app from playstore_apps_cleaned 
+where category='GAME'
+order by installs desc
+
+
+
+
+
+select app from     playstore_apps_cleaned where 
+`Android Ver`>='4.0.3'
+
+
+
+
+
+select sum(case when type='Free' then 1 end) as free_app_count,
+sum(case when type='Paid' then 1 end) as paid_app_count
+from playstore_apps_cleaned
+
+
+
+
+
+
